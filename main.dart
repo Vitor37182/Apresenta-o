@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-import 'perfil.dart';
 import 'recuperar.dart';
+import 'principal.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() async {
@@ -55,7 +55,6 @@ class LoginScreen extends StatelessWidget {
     final String password = _passwordController.text;
 
     try {
-      // Verifica se o email e a senha existem na coleção 'usuarios'
       final QuerySnapshot result = await FirebaseFirestore.instance
           .collection('usuarios')
           .where('email', isEqualTo: email)
@@ -67,10 +66,9 @@ class LoginScreen extends StatelessWidget {
         return;
       }
 
-      // Navega para a tela de perfil
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => Perfil()),
+        MaterialPageRoute(builder: (context) => Principal()),
       );
     } catch (e) {
       await _showErrorDialog(context, 'Erro ao fazer login: $e');
